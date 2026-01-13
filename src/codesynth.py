@@ -839,8 +839,8 @@ Auto-detected directories (in order):
     output_group.add_argument(
         "-o",
         "--output",
-        default="source_code.md",
-        help="Output file name (default: source_code.md)",
+        default="codesynth.md",
+        help="Output file name (default: codesynth.md)",
     )
     output_group.add_argument(
         "--stdout",

@@ -182,7 +182,7 @@ codesynth -i .customignore
 
 | Option          | Short | Description                           |
 | --------------- | ----- | ------------------------------------- |
-| `--output FILE` | `-o`  | Output file (default: source_code.md) |
+| `--output FILE` | `-o`  | Output file (default: codesynth.md) |
 | `--stdout`      |       | Output to stdout                      |
 | `--quiet`       | `-q`  | Suppress progress messages            |
 | `--with-tree`   |       | Include directory tree in output      |

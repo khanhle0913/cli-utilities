@@ -85,3 +85,4 @@ uv run install.py --uninstall
 | Utility     | Description                                    | Usage Guide                            |
 | ----------- | ---------------------------------------------- | -------------------------------------- |
 | `codesynth` | Synthesize codebase into LLM-friendly markdown | [docs/codesynth.md](docs/codesynth.md) |
+| `cflow`     | Visualize function call graphs                 | [docs/cflow.md](docs/cflow.md)         |

@@ -10,4 +10,5 @@ wheels/
 .venv
 
 # Generated outputs
-source_code.md
+codesynth.md
+cflow.md
