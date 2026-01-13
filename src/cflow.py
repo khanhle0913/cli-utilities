@@ -411,12 +411,15 @@ def build_call_graph(
                         if not c.startswith(f"{current_class}.")
                     ]
                     if other_class_candidates:
-                        return other_class_candidates[0]
+                        candidates = other_class_candidates
 
+                # Only resolve if there's exactly ONE candidate
+                # If multiple candidates exist (e.g., PersonRepository.create vs 
+                # ZoneRepository.create), we cannot determine which one without 
+                # type analysis, so we return None to avoid false positives
                 if len(candidates) == 1:
                     return candidates[0]
-                elif len(candidates) > 1:
-                    return candidates[0]
+                # Multiple candidates = ambiguous, don't resolve
 
             # Don't resolve arbitrary instance.method() calls
             return None
@@ -541,8 +544,15 @@ def format_tree_text(graph: CallGraph, max_depth: int = 10) -> str:
 
 
 def format_mermaid(graph: CallGraph, max_nodes: int = 50) -> str:
-    """Generate Mermaid flowchart."""
-    lines = ["```mermaid", "flowchart TD"]
+    """Generate Mermaid flowchart with ELK layout."""
+    lines = [
+        "```mermaid",
+        "---",
+        "config:",
+        "  layout: elk",
+        "---",
+        "flowchart TD",
+    ]
 
     # Collect nodes in graph
     nodes_in_graph: Set[str] = set()

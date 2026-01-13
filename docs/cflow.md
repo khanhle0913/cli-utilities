@@ -74,9 +74,13 @@ main (main.py:45)
 
 ### With Mermaid (`--with-mermaid`)
 
-Adds a visual Mermaid flowchart diagram:
+Adds a visual Mermaid flowchart diagram with ELK layout for better graph visualization:
 
 ```mermaid
+---
+config:
+  layout: elk
+---
 flowchart TD
     main["main"]:::entry
     parse_args["parse_args"]
@@ -164,7 +168,13 @@ main (main.py:45)
 
 ## Call Graph Diagram
 
-\`\`\`mermaid
+## \`\`\`mermaid
+
+config:
+layout: elk
+
+---
+
 flowchart TD
 main["main"]:::entry
 ...
