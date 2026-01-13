@@ -22,8 +22,16 @@ irm https://astral.sh/uv/install.ps1 | iex
 
 ### Installation
 
+**Linux/macOS:**
+
 ```bash
 make install
+```
+
+**Windows (PowerShell):**
+
+```powershell
+uv run install.py
 ```
 
 ### Setup PATH
@@ -60,8 +68,16 @@ codesynth --help
 
 ### Uninstall
 
+**Linux/macOS:**
+
 ```bash
 make uninstall
+```
+
+**Windows (PowerShell):**
+
+```powershell
+uv run install.py --uninstall
 ```
 
 ## Available Utilities
