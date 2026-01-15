@@ -63,7 +63,7 @@ $env:Path += ";$env:USERPROFILE\.local\bin"
 ### Verify Installation
 
 ```bash
-codesynth --help
+codesynth
 ```
 
 ### Uninstall
@@ -82,7 +82,13 @@ uv run install.py --uninstall
 
 ## Available Utilities
 
-| Utility     | Description                                    | Usage Guide                            |
-| ----------- | ---------------------------------------------- | -------------------------------------- |
-| `codesynth` | Synthesize codebase into LLM-friendly markdown | [docs/codesynth.md](docs/codesynth.md) |
-| `cflow`     | Visualize function call graphs                 | [docs/cflow.md](docs/cflow.md)         |
+| Utility     | Description                                    | Documentation                                      |
+| ----------- | ---------------------------------------------- | -------------------------------------------------- |
+| `codesynth` | Synthesize codebase into LLM-friendly markdown | [src/codesynth/README.md](src/codesynth/README.md) |
+| `cflow`     | Visualize function call graphs                 | [docs/cflow.md](docs/cflow.md)                     |
+
+## Development Docs
+
+| Document                             | Description              |
+| ------------------------------------ | ------------------------ |
+| [dev_docs/uiux.md](dev_docs/uiux.md) | CLI UX design guidelines |
