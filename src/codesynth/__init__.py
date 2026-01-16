@@ -231,7 +231,7 @@ def handle_scan_mode(args, quiet: bool, clipboard: bool = False) -> int:
     scan_directories: List[str] = []
     user_specified_dir = args.directory != "."
 
-    if user_specified_dir:
+    if user_specified_dir or args.no_detect:
         scan_directories = [args.directory]
         root_dir = args.directory
         tree_root = args.directory

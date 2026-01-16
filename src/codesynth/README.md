@@ -77,6 +77,7 @@ Arrow key navigation to configure:
 | `--max-size`     |       | Maximum file size (e.g., 100KB, 1MB) |
 | `--ignore-file`  | `-i`  | Custom ignore file                   |
 | `--no-gitignore` |       | Ignore .gitignore patterns           |
+| `--no-detect`    |       | Disable auto-detect for `.`          |
 
 ### Content
 

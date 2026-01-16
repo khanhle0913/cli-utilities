@@ -187,6 +187,7 @@ def show_help():
     console.print(
         "    --max-size SIZE      max file size [dim](e.g., 100KB)[/dim]"
     )
+    console.print("    --no-detect          disable auto-detect for '.'")
     console.print()
     console.print("    [bold]Other[/bold]")
     console.print("    --no-gitignore       ignore .gitignore")

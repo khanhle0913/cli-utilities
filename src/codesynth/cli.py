@@ -98,6 +98,11 @@ def create_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Ignore .gitignore patterns",
     )
+    file_group.add_argument(
+        "--no-detect",
+        action="store_true",
+        help="Disable auto-detecting source directories when using '.'",
+    )
 
     # Content options
     content_group = parser.add_argument_group("Content")
