@@ -187,6 +187,7 @@ def show_help():
     console.print(
         "    --max-size SIZE      max file size [dim](e.g., 100KB)[/dim]"
     )
+    console.print("    --no-detect          disable auto-detect for '.'")
     console.print()
     console.print("    [bold]Other[/bold]")
     console.print("    --no-gitignore       ignore .gitignore")
@@ -194,6 +195,10 @@ def show_help():
     console.print("    --list-files         list files only")
     console.print("    --stats-only         statistics only")
     console.print("    -q                   quiet mode")
+    console.print()
+    console.print("    [bold]Reverse[/bold]")
+    console.print("    --reverse FILE       reverse codesynth markdown")
+    console.print("    --output-dir DIR     output directory for reverse")
     console.print()
 
     # Tips

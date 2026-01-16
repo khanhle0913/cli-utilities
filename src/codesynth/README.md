@@ -17,6 +17,9 @@ codesynth -f src/main.py src/utils.py
 
 # With directory tree
 codesynth . -t
+
+# Reverse markdown into source files
+codesynth --reverse codesynth.md --output-dir ./restored
 ```
 
 ## Usage Patterns
@@ -74,6 +77,7 @@ Arrow key navigation to configure:
 | `--max-size`     |       | Maximum file size (e.g., 100KB, 1MB) |
 | `--ignore-file`  | `-i`  | Custom ignore file                   |
 | `--no-gitignore` |       | Ignore .gitignore patterns           |
+| `--no-detect`    |       | Disable auto-detect for `.`          |
 
 ### Content
 
@@ -87,6 +91,13 @@ Arrow key navigation to configure:
 | -------------- | ------------------------------- |
 | `--list-files` | List files only, don't generate |
 | `--stats-only` | Show statistics only            |
+
+### Reverse
+
+| Option          | Description                                |
+| --------------- | ------------------------------------------ |
+| `--reverse`     | Reverse codesynth markdown into source     |
+| `--output-dir`  | Output directory for `--reverse`           |
 
 ## Best Practices
 
@@ -164,6 +175,12 @@ codesynth -f src/main.py src/config.py src/core/*.py -t
 codesynth --extensions py -t --stdout | pbcopy
 ```
 
+### Restore from Markdown
+
+```bash
+codesynth --reverse codesynth.md --output-dir ./restored-project
+```
+
 ## Output Format
 
 Generated markdown includes:
@@ -201,5 +218,6 @@ src/codesynth/
 ├── interactive.py   # Interactive mode (InquirerPy)
 ├── output.py        # Console output formatting
 ├── parser.py        # Gitignore parsing
+├── reverse.py       # Reverse markdown into source files
 └── utils.py         # Utility functions
 ```
