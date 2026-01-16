@@ -3,7 +3,7 @@
 import os
 import sys
 
-from rich.console import Console
+from .rich_compat import Console
 
 from .collector import detect_source_directories
 

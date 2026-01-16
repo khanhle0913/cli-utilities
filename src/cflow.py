@@ -20,11 +20,15 @@ from typing import Dict, List, Set, Optional, Tuple
 from dataclasses import dataclass, field
 from collections import defaultdict
 
-from rich.console import Console
-from rich.table import Table
-from rich.tree import Tree
-from rich.progress import Progress, SpinnerColumn, TextColumn
-from rich import box
+from codesynth.rich_compat import (
+    Console,
+    Table,
+    Tree,
+    Progress,
+    SpinnerColumn,
+    TextColumn,
+    box,
+)
 
 # Rich console for pretty output
 console = Console()

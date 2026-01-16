@@ -72,15 +72,14 @@ def is_binary_file(filepath: str) -> Tuple[bool, str]:
     Returns:
         Tuple[bool, str]: (is_binary, reason)
     """
-    ext = os.path.splitext(filepath)[1].lstrip(".").lower()
-    if ext in BINARY_EXTENSIONS:
-        return True, f"binary extension (.{ext})"
-
     try:
         with open(filepath, "rb") as f:
             header = f.read(32)
 
             if not header:
+                ext = os.path.splitext(filepath)[1].lstrip(".").lower()
+                if ext in BINARY_EXTENSIONS:
+                    return True, f"binary extension (.{ext})"
                 return False, ""
 
             for signature in BINARY_SIGNATURES:
@@ -97,6 +96,10 @@ def is_binary_file(filepath: str) -> Tuple[bool, str]:
             )
             if len(chunk) > 0 and (non_printable / len(chunk)) > 0.1:
                 return True, "high non-printable character ratio"
+
+        ext = os.path.splitext(filepath)[1].lstrip(".").lower()
+        if ext in BINARY_EXTENSIONS:
+            return True, f"binary extension (.{ext})"
 
     except (OSError, IOError) as e:
         return False, f"error checking: {e}"

@@ -2,7 +2,7 @@
 
 import os
 
-from rich.console import Console
+from .rich_compat import Console
 
 from .utils import format_size
 

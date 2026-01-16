@@ -6,7 +6,7 @@ import os
 import sys
 from typing import List
 
-from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn
+from .rich_compat import Progress, SpinnerColumn, TextColumn, BarColumn
 
 from .cli import create_parser
 from .parser import GitignoreParser

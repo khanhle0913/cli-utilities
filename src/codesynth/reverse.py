@@ -74,7 +74,7 @@ def parse_codesynth_markdown(content: str) -> Tuple[List[ParsedFile], List[str]]
 
         fence_marker = _parse_fence_marker(lines[index])
         if not fence_marker:
-            warnings.append(f"Invalid code fence for {rel_path}")
+            warnings.append(f"Missing code fence for {rel_path}")
             index += 1
             continue
 
