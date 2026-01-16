@@ -98,6 +98,11 @@ def create_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Ignore .gitignore patterns",
     )
+    file_group.add_argument(
+        "--no-detect",
+        action="store_true",
+        help="Disable auto-detecting source directories when using '.'",
+    )
 
     # Content options
     content_group = parser.add_argument_group("Content")
@@ -124,6 +129,19 @@ def create_parser() -> argparse.ArgumentParser:
         "--list-files",
         action="store_true",
         help="List files only",
+    )
+
+    # Reverse options
+    reverse_group = parser.add_argument_group("Reverse")
+    reverse_group.add_argument(
+        "--reverse",
+        metavar="FILE",
+        help="Reverse codesynth markdown into source files",
+    )
+    reverse_group.add_argument(
+        "--output-dir",
+        metavar="DIR",
+        help="Output directory for --reverse",
     )
 
     return parser

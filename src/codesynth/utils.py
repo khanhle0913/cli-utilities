@@ -35,7 +35,7 @@ def format_size(size_bytes: int) -> str:
 def parse_size(size_str: str) -> int:
     """Parse human-readable size string to bytes."""
     size_str = size_str.strip().upper()
-    units = {"B": 1, "KB": 1024, "MB": 1024**2, "GB": 1024**3}
+    units = {"GB": 1024**3, "MB": 1024**2, "KB": 1024, "B": 1}
 
     for unit, multiplier in units.items():
         if size_str.endswith(unit):

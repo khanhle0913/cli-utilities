@@ -29,6 +29,7 @@ from .output import (
     print_help_hint,
 )
 from .interactive import interactive_mode
+from .reverse import reverse_codesynth
 
 
 def copy_to_clipboard(text: str) -> bool:
@@ -64,6 +65,9 @@ def main() -> int:
     parser = create_parser()
     args = parser.parse_args()
 
+    if args.reverse:
+        return handle_reverse_mode(args)
+
     # Validate directory
     if not os.path.isdir(args.directory):
         console.print(f"  [red]x[/red] Not a directory: {args.directory}")
@@ -82,6 +86,24 @@ def main() -> int:
 
     # Regular directory scan mode
     return handle_scan_mode(args, quiet, clipboard_mode)
+
+
+def handle_reverse_mode(args) -> int:
+    """Handle reverse mode: codesynth markdown back to source files."""
+    if not os.path.isfile(args.reverse):
+        console.print(f"  [red]x[/red] Not a file: {args.reverse}")
+        return 1
+
+    if not args.output_dir:
+        console.print("  [red]x[/red] --output-dir is required with --reverse")
+        return 1
+
+    if os.path.exists(args.output_dir) and not os.path.isdir(args.output_dir):
+        console.print(f"  [red]x[/red] Not a directory: {args.output_dir}")
+        return 1
+
+    reverse_codesynth(args.reverse, args.output_dir, quiet=args.quiet)
+    return 0
 
 
 def handle_files_mode(args, quiet: bool, clipboard: bool = False) -> int:
@@ -209,7 +231,7 @@ def handle_scan_mode(args, quiet: bool, clipboard: bool = False) -> int:
     scan_directories: List[str] = []
     user_specified_dir = args.directory != "."
 
-    if user_specified_dir:
+    if user_specified_dir or args.no_detect:
         scan_directories = [args.directory]
         root_dir = args.directory
         tree_root = args.directory

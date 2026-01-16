@@ -9,3 +9,11 @@ dependencies = [
     "InquirerPy>=0.3.4",
     "pyperclip>=1.11.0",
 ]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
