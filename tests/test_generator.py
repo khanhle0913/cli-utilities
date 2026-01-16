@@ -49,4 +49,4 @@ def test_generate_markdown_skips_oversized(tmp_path):
     )
 
     assert stats["skipped_files"] == 1
-    assert "Status: Skipped" in stats["content"]
+    assert "**Status:** Skipped" in stats["content"]
