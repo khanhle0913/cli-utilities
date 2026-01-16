@@ -126,4 +126,17 @@ def create_parser() -> argparse.ArgumentParser:
         help="List files only",
     )
 
+    # Reverse options
+    reverse_group = parser.add_argument_group("Reverse")
+    reverse_group.add_argument(
+        "--reverse",
+        metavar="FILE",
+        help="Reverse codesynth markdown into source files",
+    )
+    reverse_group.add_argument(
+        "--output-dir",
+        metavar="DIR",
+        help="Output directory for --reverse",
+    )
+
     return parser
