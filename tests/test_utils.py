@@ -47,7 +47,7 @@ def test_is_binary_file_detects_by_extension(tmp_path):
 
 
 def test_is_binary_file_detects_null_bytes(tmp_path):
-    binary_file = tmp_path / "data.txt"
+    binary_file = tmp_path / "data.bin"
     binary_file.write_bytes(b"text\x00more")
     is_binary, reason = is_binary_file(str(binary_file))
     assert is_binary is True

@@ -5,7 +5,7 @@ def test_parse_codesynth_markdown_warns_on_missing_fence():
     content = "## File: missing.txt\n\nno fence here\n"
     files, warnings = parse_codesynth_markdown(content)
     assert files == []
-    assert any("Invalid code fence" in warning for warning in warnings)
+    assert any("Missing code fence" in warning for warning in warnings)
 
 
 def test_reverse_codesynth_writes_files(tmp_path):
