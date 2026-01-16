@@ -73,17 +73,25 @@ def test_main_files_mode_returns_error_on_missing_files(tmp_path, monkeypatch):
 
 
 def test_interactive_mode_builds_args(monkeypatch, tmp_path):
-    responses = iter([".", True, "clipboard"])
+    select_responses = iter([".", True, "clipboard"])
+    text_responses = iter(["py, js", "tests/*,dist/*", "100KB", "3"])
 
     class FakeSelect:
         def execute(self):
-            return next(responses)
+            return next(select_responses)
+
+    class FakeText:
+        def execute(self):
+            return next(text_responses)
 
     def fake_select(*_args, **_kwargs):
         return FakeSelect()
 
+    def fake_text(*_args, **_kwargs):
+        return FakeText()
+
     fake_module = types.SimpleNamespace(
-        inquirer=types.SimpleNamespace(select=fake_select)
+        inquirer=types.SimpleNamespace(select=fake_select, text=fake_text)
     )
 
     monkeypatch.setitem(sys.modules, "InquirerPy", fake_module)
@@ -91,4 +99,18 @@ def test_interactive_mode_builds_args(monkeypatch, tmp_path):
 
     args = interactive_mode()
 
-    assert args == [".", "-t", "--clipboard"]
+    assert args == [
+        ".",
+        "-t",
+        "--clipboard",
+        "--extensions",
+        "py",
+        "js",
+        "-e",
+        "tests/*",
+        "dist/*",
+        "--max-size",
+        "100KB",
+        "--max-depth",
+        "3",
+    ]
