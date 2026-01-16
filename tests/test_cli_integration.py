@@ -73,11 +73,11 @@ def test_main_files_mode_returns_error_on_missing_files(tmp_path, monkeypatch):
 
 
 def test_interactive_mode_builds_args(monkeypatch, tmp_path):
-    responses = iter([".", True, "clipboard"])
+    select_responses = iter([".", True, "clipboard"])
 
     class FakeSelect:
         def execute(self):
-            return next(responses)
+            return next(select_responses)
 
     def fake_select(*_args, **_kwargs):
         return FakeSelect()
