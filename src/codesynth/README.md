@@ -62,6 +62,7 @@ Arrow key navigation to configure:
 | ---------- | ----- | ----------------------------------- |
 | `--output` | `-o`  | Output file (default: codesynth.md) |
 | `--stdout` |       | Output to stdout                    |
+| `--clipboard` |    | Copy output to clipboard            |
 | `--quiet`  | `-q`  | Suppress progress messages          |
 | `--tree`   | `-t`  | Include directory tree              |
 | `--size`   | `-s`  | Show file sizes in output           |
@@ -74,16 +75,16 @@ Arrow key navigation to configure:
 | `--extensions`   |       | Filter by file extensions            |
 | `--exclude`      | `-e`  | Glob patterns to exclude             |
 | `--max-depth`    |       | Maximum directory depth              |
-| `--max-size`     |       | Maximum file size (e.g., 100KB, 1MB) |
 | `--ignore-file`  | `-i`  | Custom ignore file                   |
 | `--no-gitignore` |       | Ignore .gitignore patterns           |
 | `--no-detect`    |       | Disable auto-detect for `.`          |
 
 ### Content
 
-| Option             | Description                    |
-| ------------------ | ------------------------------ |
-| `--include-binary` | Include binary files in output |
+| Option             | Description                           |
+| ------------------ | ------------------------------------- |
+| `--max-size`       | Maximum file size (e.g., 100KB, 1MB)  |
+| `--include-binary` | Include binary files in output        |
 
 ### Analysis
 
