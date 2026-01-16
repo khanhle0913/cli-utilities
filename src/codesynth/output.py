@@ -195,6 +195,10 @@ def show_help():
     console.print("    --stats-only         statistics only")
     console.print("    -q                   quiet mode")
     console.print()
+    console.print("    [bold]Reverse[/bold]")
+    console.print("    --reverse FILE       reverse codesynth markdown")
+    console.print("    --output-dir DIR     output directory for reverse")
+    console.print()
 
     # Tips
     console.print("  [dim]Tips[/dim]")
