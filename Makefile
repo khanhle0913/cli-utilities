@@ -20,13 +20,19 @@ help:
 	@echo ""
 
 install:
-	@uv run install.py
+	@if [ -x .venv/bin/python ]; then .venv/bin/python install.py; \
+	elif [ -x venv/bin/python ]; then venv/bin/python install.py; \
+	else uv run install.py; fi
 
 uninstall:
-	@uv run install.py --uninstall
+	@if [ -x .venv/bin/python ]; then .venv/bin/python install.py --uninstall; \
+	elif [ -x venv/bin/python ]; then venv/bin/python install.py --uninstall; \
+	else uv run install.py --uninstall; fi
 
 list:
-	@uv run install.py --list
+	@if [ -x .venv/bin/python ]; then .venv/bin/python install.py --list; \
+	elif [ -x venv/bin/python ]; then venv/bin/python install.py --list; \
+	else uv run install.py --list; fi
 
 lint:
 	@uv run pyright src/ install.py
