@@ -80,9 +80,16 @@ def check_uv() -> bool:
     return shutil.which("uv") is not None
 
 
-def create_wrapper_unix(src_path: Path, target_path: Path, project_dir: Path):
+def create_wrapper_unix(
+    src_path: Path, target_path: Path, project_dir: Path, venv_python: Path | None
+):
     """Create shell wrapper for Unix systems."""
-    content = f"""#!/bin/bash
+    if venv_python:
+        content = f"""#!/bin/bash
+exec "{venv_python}" "{src_path}" "$@"
+"""
+    else:
+        content = f"""#!/bin/bash
 exec uv run --project "{project_dir}" "{src_path}" "$@"
 """
     target_path.write_text(content)
@@ -93,13 +100,32 @@ exec uv run --project "{project_dir}" "{src_path}" "$@"
 
 
 def create_wrapper_windows(
-    src_path: Path, target_path: Path, project_dir: Path
+    src_path: Path, target_path: Path, project_dir: Path, venv_python: Path | None
 ):
     """Create batch wrapper for Windows."""
-    content = f"""@echo off
+    if venv_python:
+        content = f"""@echo off
+"{venv_python}" "{src_path}" %*
+"""
+    else:
+        content = f"""@echo off
 uv run --project "{project_dir}" "{src_path}" %*
 """
     target_path.with_suffix(".cmd").write_text(content)
+
+
+def get_venv_python(project_dir: Path) -> Path | None:
+    """Find a Python interpreter in a local venv."""
+    venv_dirs = [project_dir / ".venv", project_dir / "venv"]
+    for venv_dir in venv_dirs:
+        python_path = (
+            venv_dir / "Scripts" / "python.exe"
+            if IS_WINDOWS
+            else venv_dir / "bin" / "python"
+        )
+        if python_path.exists():
+            return python_path
+    return None
 
 
 def install():
@@ -148,12 +174,17 @@ def install():
             continue
 
         project_dir = Path(__file__).parent.resolve()
+        venv_python = get_venv_python(project_dir)
         if IS_WINDOWS:
             target_path = INSTALL_DIR / alias_name
-            create_wrapper_windows(src_path.resolve(), target_path, project_dir)
+            create_wrapper_windows(
+                src_path.resolve(), target_path, project_dir, venv_python
+            )
         else:
             target_path = INSTALL_DIR / alias_name
-            create_wrapper_unix(src_path.resolve(), target_path, project_dir)
+            create_wrapper_unix(
+                src_path.resolve(), target_path, project_dir, venv_python
+            )
 
         print(f"  {Colors.CYAN}[+]{Colors.RESET} Installed {alias_name}")
 
