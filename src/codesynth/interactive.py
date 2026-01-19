@@ -78,6 +78,62 @@ def interactive_mode() -> list[str]:
     if output == "clipboard":
         args.append("--clipboard")
 
+    # 4. Extensions
+    console.print("[dim]comma/space separated | leave blank for all[/dim]")
+    extensions = inquirer.text(  # type: ignore
+        message="Extensions",
+        default="",
+    ).execute()
+    clear_lines(2)
+    if extensions:
+        ext_list = [
+            ext.strip().lstrip(".")
+            for ext in extensions.replace(",", " ").split()
+            if ext.strip()
+        ]
+        if ext_list:
+            args.append("--extensions")
+            args.extend(ext_list)
+
+    # 5. Exclude patterns
+    console.print("[dim]comma/space separated | leave blank for none[/dim]")
+    exclude_patterns = inquirer.text(  # type: ignore
+        message="Exclude patterns",
+        default="",
+    ).execute()
+    clear_lines(2)
+    if exclude_patterns:
+        exclude_list = [
+            pattern.strip()
+            for pattern in exclude_patterns.replace(",", " ").split()
+            if pattern.strip()
+        ]
+        if exclude_list:
+            args.append("-e")
+            args.extend(exclude_list)
+
+    # 6. Max file size
+    console.print("[dim]e.g., 100KB, 1MB | leave blank for none[/dim]")
+    max_size = inquirer.text(  # type: ignore
+        message="Max file size",
+        default="",
+    ).execute()
+    clear_lines(2)
+    if max_size:
+        args.append("--max-size")
+        args.append(max_size.strip())
+
+    # 7. Max depth
+    console.print("[dim]integer | leave blank for none[/dim]")
+    max_depth = inquirer.text(  # type: ignore
+        message="Max depth",
+        default="",
+    ).execute()
+    clear_lines(2)
+    if max_depth:
+        args.append("--max-depth")
+        args.append(max_depth.strip())
+
     # Show command
     cmd = "codesynth " + " ".join(args)
     console.print(f"  [dim]>[/dim] {cmd}")

@@ -1,45 +1,13 @@
 """Output formatting for codesynth (Claude Code style)."""
 
 import os
-from typing import Optional
 
 from rich.console import Console
-from rich.markdown import Markdown
 
 from .utils import format_size
 
 
 console = Console()
-
-
-def dim(text: str) -> str:
-    """Return dimmed text."""
-    return f"[dim]{text}[/dim]"
-
-
-def success(text: str) -> str:
-    """Return success-styled text."""
-    return f"[green]{text}[/green]"
-
-
-def warning(text: str) -> str:
-    """Return warning-styled text."""
-    return f"[yellow]{text}[/yellow]"
-
-
-def error(text: str) -> str:
-    """Return error-styled text."""
-    return f"[red]{text}[/red]"
-
-
-def info(text: str) -> str:
-    """Return info-styled text."""
-    return f"[cyan]{text}[/cyan]"
-
-
-def bold(text: str) -> str:
-    """Return bold text."""
-    return f"[bold]{text}[/bold]"
 
 
 def print_status(message: str, style: str = "info"):
@@ -184,16 +152,26 @@ def show_help():
     console.print("    --extensions EXTS    filter by extension")
     console.print("    -e, --exclude PATS   exclude patterns")
     console.print("    --max-depth N        max directory depth")
+    console.print("    -i FILE              custom ignore file [dim](.gitignore)[/dim]")
+    console.print("    --no-detect          disable auto-detect for '.'")
+    console.print()
+    console.print("    [bold]Content[/bold]")
     console.print(
         "    --max-size SIZE      max file size [dim](e.g., 100KB)[/dim]"
     )
+    console.print("    --include-binary     include binary files")
+    console.print()
+    console.print("    [bold]Analysis[/bold]")
+    console.print("    --list-files         list files only")
+    console.print("    --stats-only         statistics only")
     console.print()
     console.print("    [bold]Other[/bold]")
     console.print("    --no-gitignore       ignore .gitignore")
-    console.print("    --include-binary     include binary files")
-    console.print("    --list-files         list files only")
-    console.print("    --stats-only         statistics only")
     console.print("    -q                   quiet mode")
+    console.print()
+    console.print("    [bold]Reverse[/bold]")
+    console.print("    --reverse FILE       reverse codesynth markdown")
+    console.print("    --output-dir DIR     output directory for reverse")
     console.print()
 
     # Tips
