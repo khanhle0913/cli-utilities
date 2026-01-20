@@ -64,6 +64,7 @@ Arrow key navigation to configure:
 | `--stdout` |       | Output to stdout                    |
 | `--clipboard` |    | Copy output to clipboard            |
 | `--quiet`  | `-q`  | Suppress progress messages          |
+| `--clear`  | `-c`  | Delete output file and exit         |
 | `--tree`   | `-t`  | Include directory tree              |
 | `--size`   | `-s`  | Show file sizes in output           |
 

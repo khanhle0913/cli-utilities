@@ -27,6 +27,7 @@ from .output import (
     print_codebase_stats,
     show_help,
     print_help_hint,
+    print_status,
 )
 from .interactive import interactive_mode
 from .reverse import reverse_codesynth
@@ -65,6 +66,9 @@ def main() -> int:
     parser = create_parser()
     args = parser.parse_args()
 
+    if args.clear:
+        return handle_clear_mode(args)
+
     if args.reverse:
         return handle_reverse_mode(args)
 
@@ -86,6 +90,25 @@ def main() -> int:
 
     # Regular directory scan mode
     return handle_scan_mode(args, quiet, clipboard_mode)
+
+
+def handle_clear_mode(args) -> int:
+    """Handle --clear mode: delete output file and exit."""
+    output_path = args.output
+
+    if os.path.isdir(output_path):
+        console.print(f"  [red]x[/red] Not a file: {output_path}")
+        return 1
+
+    if os.path.exists(output_path):
+        os.remove(output_path)
+        if not args.quiet:
+            print_status(f"Deleted {output_path}", style="success")
+        return 0
+
+    if not args.quiet:
+        print_status(f"No file to delete: {output_path}", style="warning")
+    return 0
 
 
 def handle_reverse_mode(args) -> int:
