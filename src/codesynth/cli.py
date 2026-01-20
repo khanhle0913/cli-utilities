@@ -45,6 +45,12 @@ def create_parser() -> argparse.ArgumentParser:
         help="Suppress progress messages",
     )
     output_group.add_argument(
+        "-c",
+        "--clear",
+        action="store_true",
+        help="Delete the output file and exit",
+    )
+    output_group.add_argument(
         "-t",
         "--tree",
         action="store_true",

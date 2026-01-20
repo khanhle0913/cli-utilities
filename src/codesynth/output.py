@@ -144,6 +144,7 @@ def show_help():
     )
     console.print("    --clipboard          copy to clipboard")
     console.print("    --stdout             print to terminal")
+    console.print("    -c, --clear          delete output file and exit")
     console.print("    -t, --tree           include directory tree")
     console.print("    -s, --size           show file sizes")
     console.print()
