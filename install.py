@@ -23,7 +23,6 @@ from pathlib import Path
 # Utility definitions: source_file -> alias_name
 UTILITIES = {
     "codesynth.py": "codesynth",
-    "cflow.py": "cflow",
 }
 
 # ================================================================
