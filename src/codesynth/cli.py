@@ -72,7 +72,7 @@ def create_parser() -> argparse.ArgumentParser:
         "--files",
         nargs="+",
         metavar="FILE",
-        help="Include only specific files",
+        help="Include specific files or directories",
     )
     file_group.add_argument(
         "--extensions",

@@ -13,7 +13,7 @@ codesynth .
 codesynth ./my-project
 
 # Specific files
-codesynth -f src/main.py src/utils.py
+codesynth -f src/main.py src/utils.py src/
 
 # With directory tree
 codesynth . -t
@@ -72,7 +72,7 @@ Arrow key navigation to configure:
 
 | Option           | Short | Description                          |
 | ---------------- | ----- | ------------------------------------ |
-| `--files`        | `-f`  | Include only specific files          |
+| `--files`        | `-f`  | Include specific files or directories |
 | `--extensions`   |       | Filter by file extensions            |
 | `--exclude`      | `-e`  | Glob patterns to exclude             |
 | `--max-depth`    |       | Maximum directory depth              |
@@ -168,7 +168,7 @@ codesynth . -ts -o project.md
 ### Specific Core Files
 
 ```bash
-codesynth -f src/main.py src/config.py src/core/*.py -t
+codesynth -f src/main.py src/config.py src/core/*.py src/ -t
 ```
 
 ### Quick Export for LLM
