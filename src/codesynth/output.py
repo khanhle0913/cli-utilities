@@ -53,7 +53,7 @@ def print_files_selected(count: int):
 
 def print_missing_files(files: list[str]):
     """Print missing files warning."""
-    console.print(f"  [yellow]![/yellow] Files not found:")
+    console.print(f"  [yellow]![/yellow] Paths not found or empty:")
     for f in files:
         console.print(f"      [dim]{f}[/dim]")
 
@@ -132,8 +132,8 @@ def show_help():
     console.print("    [bold]Frontend project[/bold]")
     console.print("    codesynth --extensions js ts tsx --max-size 50KB")
     console.print()
-    console.print("    [bold]Specific files[/bold]")
-    console.print("    codesynth -f src/main.py src/utils.py -t")
+    console.print("    [bold]Specific files or folders[/bold]")
+    console.print("    codesynth -f src/main.py src/utils.py src/ -t")
     console.print()
 
     # Options grouped
@@ -149,7 +149,7 @@ def show_help():
     console.print("    -s, --size           show file sizes")
     console.print()
     console.print("    [bold]Selection[/bold]")
-    console.print("    -f FILES             specific files only")
+    console.print("    -f FILES             specific files or directories")
     console.print("    --extensions EXTS    filter by extension")
     console.print("    -e, --exclude PATS   exclude patterns")
     console.print("    --max-depth N        max directory depth")

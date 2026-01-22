@@ -130,9 +130,18 @@ def handle_reverse_mode(args) -> int:
 
 
 def handle_files_mode(args, quiet: bool, clipboard: bool = False) -> int:
-    """Handle --files mode: specific files only."""
+    """Handle --files mode: specific files or directories."""
     files: List[str] = []
     missing_files: List[str] = []
+
+    extensions = None
+    if args.extensions:
+        extensions = [ext.lstrip(".").lower() for ext in args.extensions]
+
+    if args.no_gitignore:
+        ignore_parser = GitignoreParser.empty()
+    else:
+        ignore_parser = GitignoreParser(args.directory, args.ignore_file)
 
     for file_path in args.files:
         if os.path.isabs(file_path):
@@ -142,6 +151,18 @@ def handle_files_mode(args, quiet: bool, clipboard: bool = False) -> int:
 
         if os.path.isfile(full_path):
             files.append(os.path.abspath(full_path))
+        elif os.path.isdir(full_path):
+            dir_files = collect_files_filtered(
+                full_path,
+                ignore_parser,
+                extensions=extensions,
+                exclude_patterns=args.exclude,
+                max_depth=args.max_depth,
+            )
+            if dir_files:
+                files.extend(dir_files)
+            else:
+                missing_files.append(file_path)
         else:
             missing_files.append(file_path)
 

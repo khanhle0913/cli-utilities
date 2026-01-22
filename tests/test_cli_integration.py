@@ -72,6 +72,36 @@ def test_main_files_mode_returns_error_on_missing_files(tmp_path, monkeypatch):
     assert result == 1
 
 
+def test_main_files_mode_accepts_directories(tmp_path, monkeypatch, capsys):
+    file_path = tmp_path / "app.py"
+    file_path.write_text("print('hi')", encoding="utf-8")
+    subdir = tmp_path / "pkg"
+    subdir.mkdir()
+    module_path = subdir / "module.py"
+    module_path.write_text("print('module')", encoding="utf-8")
+
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            "codesynth",
+            str(tmp_path),
+            "-f",
+            "app.py",
+            "pkg",
+            "--list-files",
+            "-q",
+        ],
+    )
+
+    result = main()
+
+    assert result == 0
+    captured = capsys.readouterr()
+    assert "app.py" in captured.out
+    assert "pkg/module.py" in captured.out
+
+
 def test_interactive_mode_builds_args(monkeypatch, tmp_path):
     select_responses = iter([".", True, "clipboard"])
     text_responses = iter(["py, js", "tests/*,dist/*", "100KB", "3"])
